@@ -11,7 +11,7 @@ Bug tracker
 
 Have a bug? Please create an issue here on GitHub!
 
-https://github.com/mark-rolich/Magnifier.js/issues
+https://github.com/mark-rolich/Select2D.js/issues
 
 Copyright and License
 ---------------------
