@@ -2,20 +2,25 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Select2D demo</title>
-<meta name="description" content="Select2D demo">
+<title>Select2D.js demo</title>
+<meta name="description" content="Select2D.js demo">
 <meta name="viewport" content="width=device-width">
+<!--[if gte IE 8]>
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans">
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Inconsolata">
+<![endif]-->
 <link rel="stylesheet" type="text/css" href="select2d.min.css">
 <link rel="stylesheet" type="text/css" href="demo.css">
 </head>
 <body>
 
-<h1>Select2D</h1>
+<h1>Select2D.js</h1>
 
-<p><strong>Select2D</strong> is a javascript package which transforms HTML <em>&lt;select&gt;</em> controls to tables.</p>
+<p><strong>Select2D.js</strong> is a javascript package which transforms HTML <em>&lt;select&gt;</em> controls to tables.</p>
 <p>Supports multi-select using <em>Ctrl</em>, <em>Shift</em> and click-and-drag for select boxes with multiple selection enabled.</p>
+<p><strong>Select2D.js</strong> uses Event.js as a cross-browser event handling wrapper, which is available at <a href="https://github.com/mark-rolich/Event.js">Github</a>
+and <a href="http://www.jsclasses.org/package/212-JavaScript-Handle-events-in-a-browser-independent-manner.html">JSClasses.org</a></p>
+<p>Works in Chrome, Firefox, Safari, IE 7, 8, 9 & 10.</p>
 <p>Licensed under the MIT License, &copy; 2014 Mark Rolich</p>
 <p>Source code is available at <a href="https://github.com/mark-rolich/Select2D.js">Github</a></p>
 
@@ -24,24 +29,26 @@
 <p>Include css and js files:</p>
 
 <pre><code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;select2d.min.css&quot;&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;Event.js&quot;&gt;&lt;/script&gt;
 &lt;script type=&quot;text/javascript&quot; src=&quot;Select2D.min.js&quot;&gt;&lt;/script&gt;</code></pre>
 
-<p>Initialize <strong>Select2D</strong> passing reference to select as an argument:</p>
+<p>Initialize <strong>Select2D.js</strong> passing reference to select as an argument:</p>
 
 <pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
-var myselect = new Select2D(document.getElementById('myselect'));
+var evt = new Event(),
+    myselect = new Select2D(evt, document.getElementById('myselect'));
 &lt;/script&gt;</code></pre>
 
 <h2>Options</h2>
 
-<p>You can set <strong>Select2D</strong> options using the following data attributes:</p>
+<p>You can set <strong>Select2D.js</strong> options using the following data attributes:</p>
 <ul>
     <li>data-x | int - number of table columns</li>
     <li>data-y | int - number of table rows</li>
-    <li>data-debug | bool - by default source select element is hidden, using this you can prevent <strong>Select2D</strong> from hiding it</li>
+    <li>data-debug | bool - by default source select element is hidden, using this you can prevent <strong>Select2D.js</strong> from hiding it</li>
 </ul>
 
-<p><strong>Select2D</strong> on a regular select:</p>
+<p><strong>Select2D.js</strong> on a regular select:</p>
 
 <pre><code>&lt;select id=&quot;regular&quot; data-x=&quot;3&quot; data-y=&quot;1&quot;&gt;
     &lt;option value=&quot;red&quot;&gt;Red&lt;/option&gt;
@@ -55,7 +62,7 @@ var myselect = new Select2D(document.getElementById('myselect'));
     <option value="blue">Blue</option>
 </select>
 
-<p><strong>Select2D</strong> on a multiple select with debug:</p>
+<p><strong>Select2D.js</strong> on a multiple select with debug:</p>
 
 <pre><code>&lt;select id=&quot;multi-debug&quot; data-x=&quot;5&quot; data-y=&quot;3&quot; data-debug=&quot;true&quot; size=&quot;30&quot; multiple&gt;
     &lt;option value=&quot;0&quot; selected&gt;1&lt;/option&gt;
@@ -81,13 +88,14 @@ var myselect = new Select2D(document.getElementById('myselect'));
 
 <h2>Methods</h2>
 
-<p><strong>Select2D</strong> supports the following methods:</p>
+<p><strong>Select2D.js</strong> supports the following methods:</p>
 
 <p><em class="func">selectByIndex</em></p>
 
 <p>Select options taking an index (integer) or an array of indexes as an argument:</p>
 
-<pre><code>var select = new Select2D(document.getElementById('select'));
+<pre><code>var evt = new Event(),
+    select = new Select2D(evt, document.getElementById('select'));
 
 select.selectByIndex(2);
 select.selectByIndex([1, 3, 5]);</code></pre>
@@ -127,7 +135,7 @@ select.selectByIndex([1, 3, 5]);</code></pre>
 
 <h2>Events</h2>
 
-<p><strong>Select2D</strong> fires 3 events on option change: <em class="func">changeIdx</em>, <em class="func">changeVal</em> and <em class="func">changeTxt</em>,
+<p><strong>Select2D.js</strong> fires 3 events on option change: <em class="func">changeIdx</em>, <em class="func">changeVal</em> and <em class="func">changeTxt</em>,
 returning array of indexes, array of values, and array of text values 
 (each function returns single value for regular select)</p>
 
@@ -207,11 +215,13 @@ returning array of indexes, array of values, and array of text values
 </div>
 
 <a href="https://github.com/mark-rolich"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+<script type="text/javascript" src="Event.js"></script>
 <script type="text/javascript" src="Select2D.min.js"></script>
 <script type="text/javascript">
-var regular     = new Select2D(document.getElementById('regular')),
-    multi1      = new Select2D(document.getElementById('multi-debug')),
-    countries   = new Select2D(document.getElementById('countries')),
+var evt = new Event(),
+    regular     = new Select2D(evt, document.getElementById('regular')),
+    multi1      = new Select2D(evt, document.getElementById('multi-debug')),
+    countries   = new Select2D(evt, document.getElementById('countries')),
     evenBtn     = document.getElementById('even'),
     oddBtn      = document.getElementById('odd'),
     resetBtn    = document.getElementById('reset'),
