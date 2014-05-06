@@ -1,0 +1,67 @@
+html, body, select, input {
+    font: 14px 'Open Sans', Arial, sans-serif
+}
+
+body {
+    background-color: #fff;
+    width: 960px;
+    margin: 0px auto
+}
+
+pre, code {
+    font: 17px 'Inconsolata', monospace;
+}
+
+h1, h2 {
+    color: #777
+}
+
+pre {
+    background-color: #f5f5f5;
+    border: solid 1px #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    width: auto
+}
+
+em {
+    font-style: normal;
+    background-color: #f5f5f5;
+    color: #357ebd;
+    border: solid 1px #ccc;
+    padding: 3px 5px;
+    border-radius: 3px
+}
+
+em.func {
+    color: red
+}
+
+.s2d-tbl-countries {
+    width: 600px
+}
+
+.s2d-tbl-countries td {
+    height: 100%;
+}
+
+.s2d-tbl-countries button {
+    display: block;
+    height: 60px;
+}
+
+.result {
+    width: 600px;
+    float: left
+}
+
+#countries {
+    float: right
+}
+
+#country-result {
+    background-color: #f5f5f5;
+    border: solid 1px #ccc;
+    border-radius: 5px;
+    padding: 5px
+}
