@@ -1,0 +1,52 @@
+.s2d-tbl {
+    float: left;
+    font: 13px Arial;
+    border-collapse: collapse;
+    border: solid 1px #000;
+    padding: 0;
+    box-sizing: border-box
+}
+
+.s2d-tbl td {
+    background-color: #fff;
+    border: solid 1px #357ebd;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    color: #333;
+    width: auto;
+    height: auto;
+    box-sizing: border-box;
+}
+
+.s2d-tbl button {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 5px;
+    display: inline-block;
+    background-color: #fff;
+    border: solid 1px #fff;
+    text-align: center;
+    text-shadow: 0 -1px 0 #eee;
+    cursor: pointer;
+    box-sizing: border-box;
+    outline: none
+}
+
+.s2d-tbl button.selected {
+    border-width: 1px;
+    border-color: #357ebd #7cb9ee #7cb9ee #357ebd;
+    border-style: solid;
+    background-color: #5ba1dd;
+    color: white;
+    text-shadow: 0 -1px 0 #333
+}
+
+s2d-tbl, s2d-tbl td {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
