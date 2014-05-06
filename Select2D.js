@@ -1,10 +1,18 @@
 /**
-* Select2D is a javascript package which transforms HTML <select> controls to tables.
+* Select2D.js is a javascript package which transforms HTML <select> controls to tables.
 * Supports multi-select using Ctrl, Shift and click-and-drag for select boxes with multiple selection enabled.
+*
+* Select2D.js uses Event.js as a cross-browser event handling wrapper, which is available at
+* Github and JSClasses.org:
+*
+* Github - https://github.com/mark-rolich/Event.js
+* JS Classes - http://www.jsclasses.org/package/212-JavaScript-Handle-events-in-a-browser-independent-manner.html
+*
+* Tested in Chrome, Firefox, Safari, IE 7, 8, 9 & 10.
 *
 * @author Mark Rolich <mark.rolich@gmail.com>
 */
-var Select2D = function (src) {
+var Select2D = function (evt, src) {
     "use strict";
 
     this.changeIdx = null;
@@ -90,6 +98,7 @@ var Select2D = function (src) {
         diminish = function (idx) {
             var btn = doc.getElementById('s2d-cell-' + opt.id + '-' + idx);
 
+            btn.className = '';
             btn.removeAttribute('class');
             opt.src.options[idx].selected = false;
             delete opt.selectedBtnIds[idx];
@@ -154,12 +163,12 @@ var Select2D = function (src) {
                 }
             }, 500);
         },
-        clickHandler = function (e) {
-            var btn = e.target,
+        clickHandler = function (e, src) {
+            var btn = src,
                 idx = null;
 
             if (btn.nodeName === 'BUTTON') {
-                e.preventDefault();
+                evt.prevent(e);
 
                 idx = parseInt(btn.getAttribute('data-idx'), 10);
 
@@ -176,15 +185,15 @@ var Select2D = function (src) {
                 opt.isStarted = true;
             }
         },
-        moveHandler = function (e) {
+        moveHandler = function (e, src) {
             if (opt.isStarted === true) {
                 opt.moveStopTime = 0;
 
-                var btn = e.target,
+                var btn = src,
                     idx = null;
 
                 if (btn.nodeName === 'BUTTON') {
-                    e.preventDefault();
+                    evt.prevent(e);
 
                     idx = parseInt(btn.getAttribute('data-idx'), 10);
 
@@ -217,7 +226,7 @@ var Select2D = function (src) {
                 j       = 0,
                 k       = 0;
 
-            tbl.setAttribute('class', 's2d-tbl s2d-tbl-' + opt.id);
+            tbl.className = 's2d-tbl s2d-tbl-' + opt.id;
             btn.setAttribute('type', 'button');
 
             for (i; i < opt.y; i += 1) {
@@ -228,7 +237,7 @@ var Select2D = function (src) {
                     txt = txt.cloneNode(false);
 
                     if (opt.data[k] !== undefined) {
-                        txt.textContent = opt.data[k].txt;
+                        txt.nodeValue = opt.data[k].txt;
 
                         btn = btn.cloneNode(false);
                         btn.setAttribute('data-idx', String(k));
@@ -239,7 +248,7 @@ var Select2D = function (src) {
                         btn.appendChild(txt);
                         cell.appendChild(btn);
                     } else {
-                        txt.textContent = '';
+                        txt.nodeValue = '';
                         cell.appendChild(txt);
                     }
 
@@ -265,12 +274,12 @@ var Select2D = function (src) {
                 opt.src.style.display = 'none';
             }
 
-            tbl.addEventListener('mousedown', clickHandler);
+            evt.attach('mousedown', tbl, clickHandler);
 
             if (opt.isMulti === true) {
-                tbl.addEventListener('mousemove', moveHandler);
-                tbl.addEventListener('mouseup', upHandler);
-                tbl.addEventListener('mouseleave', outHandler);
+                evt.attach('mousemove', tbl, moveHandler);
+                evt.attach('mouseup', tbl, upHandler);
+                evt.attach('mouseleave', tbl, outHandler);
             }
         },
         init = function () {
@@ -280,8 +289,8 @@ var Select2D = function (src) {
             opt.parent  = opt.src.parentNode;
             opt.x       = opt.src.getAttribute('data-x');
             opt.y       = opt.src.getAttribute('data-y');
-            opt.debug   = !!(opt.src.hasAttribute('data-debug') && opt.src.getAttribute('data-debug') === 'true');
-            opt.isMulti = !!(opt.src.hasAttribute('multiple'));
+            opt.debug   = !!(opt.src.getAttribute('data-debug') !== null && opt.src.getAttribute('data-debug') === 'true');
+            opt.isMulti = !!(opt.src.getAttribute('multiple') !== null);
 
             var options = opt.src.getElementsByTagName('option'),
                 len = options.length,
@@ -290,7 +299,7 @@ var Select2D = function (src) {
             for (i; i < len; i += 1) {
                 opt.data[i] = {
                     val: options[i].value,
-                    txt: options[i].textContent,
+                    txt: options[i].childNodes[0].nodeValue,
                     selected: options[i].selected
                 };
             }

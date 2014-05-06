@@ -6,6 +6,21 @@ Supports multi-select using Ctrl, Shift and click-and-drag for select boxes with
 
 <a href="http://mark-rolich.github.io/Select2D.js/" target="_blank"><strong>Demo and documentation</strong></a>
 
+Select2D.js requires Event.js package, which can be acquired at the following links:
+
+* [Github](https://github.com/mark-rolich/Event.js)
+* [JS Classes](http://www.jsclasses.org/package/212-JavaScript-Handle-events-in-a-browser-independent-manner.html)
+
+Browser Compatibility
+--------------------
+
+Currently tested in:
+
+* Chrome 24
+* Firefox 18
+* IE 7, 8, 9, 10
+* Safari for Windows 5.1.7
+
 Bug tracker
 -----------
 
