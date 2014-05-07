@@ -172,7 +172,7 @@ var Select2D = function (evt, src) {
 
                 idx = parseInt(btn.getAttribute('data-idx'), 10);
 
-                if (e.ctrlKey === true && opt.isMulti === true) {
+                if ((e.ctrlKey === true || e.metaKey === true) && opt.isMulti === true) {
                     selectMultiple(idx);
                 } else if (e.shiftKey === true && opt.isMulti === true) {
                     selectRange(idx);
